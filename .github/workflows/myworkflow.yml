@@ -20,10 +20,12 @@ jobs:
                     echo "Access env variable using shell syntax"
                     echo "5. ${{env.MY_WORKSPACE_ENVIRONMENT_VARIABLE}}"
                     echo "6. ${{env.MY_STEP_ENVIRONMENT_VARIABLE}}"
+                    echo "Secrets"
+                    echo "7. ${{secrets.MY_SECRET}}"
     job2:
         name: windows job
         runs-on: windows-latest
-        steps: 
+        steps:  
             -   name: step one
                 uses: actions/checkout@v2
             -   name: step two
