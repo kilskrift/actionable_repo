@@ -7,9 +7,9 @@ jobs:
         name: ubuntu job
         runs-on: ubuntu-latest
         steps: 
-            -   name: step one
-                uses: actions/checkout@v2
-            -   name: step two
+            # -   name: step one
+            #     uses: actions/checkout@v2
+            -   name: show my env variables
                 env:
                     MY_STEP_ENVIRONMENT_VARIABLE: 'Step env value'
                 run: |
@@ -22,11 +22,29 @@ jobs:
                     echo "6. ${{env.MY_STEP_ENVIRONMENT_VARIABLE}}"
                     echo "Secrets"
                     echo "7. ${{secrets.MY_SECRET}}"
+
+            -   name: create env file artifact step
+                run: env > env_output.txt
+
+            -   name: upload artifact step
+                uses: actions/upload-artifact@v1.0.0
+                with:
+                    name: env-variables
+                    path: env_output.txt
+                                   
     job2:
         name: windows job
         runs-on: windows-latest
+        needs: job1
         steps:  
-            -   name: step one
-                uses: actions/checkout@v2
-            -   name: step two
-                run: "Get-ChildItem Env: | Sort-Object Name"
+            -   name: show job2 env variables step
+                run: "Get-ChildItem Env: | Sort-Object Name" 
+
+            -   name: download artifact
+                uses: actions/download-artifact@v1.0.0
+                with:
+                    name: env-variables
+                
+            -   name: show job1 env variables from artifact step
+                run: cat env_output.txt
+

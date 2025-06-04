@@ -27,5 +27,5 @@ jobs:
         runs-on: ubuntu-latest
         needs: [job1,job2,job3]
         steps:
-            -   name: print date step
+            -   name: print date
                 run: "date +\"%Y-%m-%d %H-%M-%S.%6N\""
