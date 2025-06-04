@@ -1,16 +1,28 @@
 name: myworkflow
 on: push
+env:
+    MY_WORKSPACE_ENVIRONMENT_VARIABLE: 'WS env value'
 jobs: 
     job1:
         name: first job
         runs-on: ubuntu-latest
         steps: 
-            -   name: step one
+            -   name: ubuntu job
+                env:
+                    MY_STEP_ENVIRONMENT_VARIABLE: 'Step env value'
+
                 uses: actions/checkout@v2
             -   name: step two
-                run: env  | sort
+                run: |
+                    echo "Access env variable using shell syntax"
+                    echo "1. $MY_WORKSPACE_ENVIRONMENT_VARIABLE"
+                    echo "2. $MY_STEP_ENVIRONMENT_VARIABLE"
+                    echo "---"
+                    echo "Access env variable using shell syntax"
+                    echo "5. ${{env.MY_WORKSPACE_ENVIRONMENT_VARIABLE}}"
+                    echo "6. ${{env.MY_STEP_ENVIRONMENT_VARIABLE}}"
     job2:
-        name: second job
+        name: windows job
         runs-on: windows-latest
         steps: 
             -   name: step one
