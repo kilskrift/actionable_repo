@@ -1,0 +1,39 @@
+name: challenge one workflow
+on: 
+    push:
+        branches:
+            -   main
+jobs: 
+    job1:
+        name: first job
+        runs-on: ubuntu-latest
+        steps: 
+            -   name: step one
+                uses: actions/checkout@v2
+            -   name: step two
+                run: date
+    job2:
+        name: second job
+        runs-on: windows-latest
+        steps: 
+            -   name: step one
+                uses: actions/checkout@v2
+            -   name: step two
+                run: Get-Date
+    job3:
+        name: third job
+        runs-on: macos-latest
+        steps:
+            -   name: checkout step
+                uses: actions/checkout@v2
+            -   name: print date step
+                run: date
+    job4:
+        name: dependant job
+        runs-on: ubuntu-latest
+        needs: [job1,job2,job3]
+        steps:
+            -   name: checkout
+                uses: actions/checkout@v2
+            -   name: print date
+                run: date
