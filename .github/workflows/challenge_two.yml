@@ -1,0 +1,24 @@
+name: challenge two workflow
+on: 
+    push:
+        branches:
+            # -   main #uncomment to run workflow
+            -   challenge_two # so we don't bog down main when merged
+env:
+    ARTIFACT_NAME: 'challenge_two_artifact'
+jobs: 
+    challenge_two_job:
+        name: challenge two job
+        runs-on: ubuntu-latest
+        steps: 
+            -   name: checkout step
+                uses: actions/checkout@v2
+
+            -   name: create artifact step
+                run: touch ./artifact-file.txt
+
+            -   name: upload artifact step
+                uses: actions/upload-artifact@v4
+                with:
+                    name: ${{env.ARTIFACT_NAME}}
+                    path: ./artifact-file.txt
