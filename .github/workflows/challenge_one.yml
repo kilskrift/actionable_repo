@@ -27,7 +27,7 @@ jobs:
             -   name: checkout step
                 uses: actions/checkout@v2
             -   name: print date step
-                run: "python3 -c 'from datetime import datetime; print(datetime.now().strftime(\"%Y-%m-%d %H:%M:%S.%f\"))"
+                run: "python3 -c 'from datetime import datetime; print(datetime.now().strftime(\"%Y-%m-%d %H:%M:%S.%f\"))'"
     job4:
         name: dependant job
         runs-on: ubuntu-latest
