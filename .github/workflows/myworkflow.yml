@@ -6,6 +6,8 @@ jobs:
     job1:
         name: ubuntu job
         runs-on: ubuntu-latest
+        outputs:
+            artifact-name: env-file
         steps: 
             # -   name: step one
             #     uses: actions/checkout@v2
@@ -24,14 +26,16 @@ jobs:
                     echo "7. ${{secrets.MY_SECRET}}"
 
             -   name: create env file artifact step
-                run: env > env_output.txt
+                run: |
+                    echo "job 1 env variables" > env-file.txt
+                    env >> env-file.txt
 
             -   name: upload artifact step
                 uses: actions/upload-artifact@v1.0.0
                 with:
-                    name: env-variables
-                    path: env_output.txt
-                                   
+                    name: env-file
+                    path: ./env-file.txt
+
     job2:
         name: windows job
         runs-on: windows-latest
@@ -43,8 +47,8 @@ jobs:
             -   name: download artifact
                 uses: actions/download-artifact@v1.0.0
                 with:
-                    name: env-variables
+                    name: env-file
                 
             -   name: show job1 env variables from artifact step
-                run: cat env_output.txt
+                run: cat ./env-file.txt
 
