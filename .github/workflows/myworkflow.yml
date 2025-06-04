@@ -4,15 +4,14 @@ env:
     MY_WORKSPACE_ENVIRONMENT_VARIABLE: 'WS env value'
 jobs: 
     job1:
-        name: first job
+        name: ubuntu job
         runs-on: ubuntu-latest
         steps: 
-            -   name: ubuntu job
-                env:
-                    MY_STEP_ENVIRONMENT_VARIABLE: 'Step env value'
-
+            -   name: step one
                 uses: actions/checkout@v2
             -   name: step two
+                env:
+                    MY_STEP_ENVIRONMENT_VARIABLE: 'Step env value'
                 run: |
                     echo "Access env variable using shell syntax"
                     echo "1. $MY_WORKSPACE_ENVIRONMENT_VARIABLE"
