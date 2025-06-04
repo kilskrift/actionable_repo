@@ -11,7 +11,7 @@ jobs:
             -   name: step one
                 uses: actions/checkout@v2
             -   name: step two
-                run: date
+                run: "date +\"%Y-%m-%d %H-%M-%S.%6N\""
     job2:
         name: second job
         runs-on: windows-latest
@@ -19,7 +19,7 @@ jobs:
             -   name: step one
                 uses: actions/checkout@v2
             -   name: step two
-                run: Get-Date
+                run: "(Get-Date).ToString(\"yyyy-MM-dd HH-mm-ss.ffffff\")"
     job3:
         name: third job
         runs-on: macos-latest
@@ -27,7 +27,7 @@ jobs:
             -   name: checkout step
                 uses: actions/checkout@v2
             -   name: print date step
-                run: date
+                run: "date +\"%Y-%m-%d %H-%M-%S.%6N\""
     job4:
         name: dependant job
         runs-on: ubuntu-latest
@@ -36,4 +36,4 @@ jobs:
             -   name: checkout
                 uses: actions/checkout@v2
             -   name: print date
-                run: date
+                run: "date +\"%Y-%m-%d %H-%M-%S.%6N\""
