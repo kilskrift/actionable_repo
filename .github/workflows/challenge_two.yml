@@ -10,18 +10,15 @@ jobs:
     challenge_two_job:
         name: challenge two job
         runs-on: ubuntu-latest
-        # outputs: 
-        #     artifact-name: ${{env.ARTIFACT_NAME}}            
         steps: 
             -   name: checkout step
                 uses: actions/checkout@v2
 
-            # -   name: create artifact step
-            #     run: touch ./artifact-file.txt
+            -   name: create artifact step
+                run: touch ./artifact-file.txt
 
             -   name: upload artifact step
                 uses: actions/upload-artifact@v4
                 with:
                     name: ${{env.ARTIFACT_NAME}}
-                    path: .
-                    # path: ./artifact-file.txt
+                    path: ./artifact-file.txt
