@@ -8,24 +8,18 @@ jobs:
         name: first job
         runs-on: ubuntu-latest
         steps: 
-            -   name: step one
-                uses: actions/checkout@v2
-            -   name: step two
+            -   name: print date step
                 run: "date +\"%Y-%m-%d %H-%M-%S.%6N\""
     job2:
         name: second job
         runs-on: windows-latest
         steps: 
-            -   name: step one
-                uses: actions/checkout@v2
-            -   name: step two
+            -   name: print date step
                 run: "(Get-Date).ToString(\"yyyy-MM-dd HH-mm-ss.ffffff\")"
     job3:
         name: third job
         runs-on: macos-latest
         steps:
-            -   name: checkout step
-                uses: actions/checkout@v2
             -   name: print date step
                 run: "python3 -c 'from datetime import datetime; print(datetime.now().strftime(\"%Y-%m-%d %H:%M:%S.%f\"))'"
     job4:
@@ -33,7 +27,5 @@ jobs:
         runs-on: ubuntu-latest
         needs: [job1,job2,job3]
         steps:
-            -   name: checkout
-                uses: actions/checkout@v2
-            -   name: print date
+            -   name: print date step
                 run: "date +\"%Y-%m-%d %H-%M-%S.%6N\""
