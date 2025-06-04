@@ -2,7 +2,8 @@ name: challenge one workflow
 on: 
     push:
         branches:
-            -   main
+            # -   main #uncomment to run workflow
+            - challenge_one # use this branch to run workflow
 jobs: 
     job1:
         name: first job
